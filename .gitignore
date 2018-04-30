@@ -1,0 +1,8 @@
+# virtualenv files
+Include
+Lib
+Scripts
+tcl
+
+.vscode
+app/__pycache__
