@@ -33,9 +33,7 @@ def add_delivery():
     db.session.add(new_delivery)
     db.session.commit()
 
-    # return jsonify(new_delivery)
     return '{}'.format(new_delivery)
-    # return 'user added ' + name
 
 # endpoint to show all delivery entries
 @app.route("/delivery", methods=["GET"])
@@ -98,33 +96,29 @@ def delivery_delete(id):
 # endpoint to create new shippment entry
 @app.route("/shippment", methods=["POST"])
 def add_shippment():
-    ship_ID = request.json['ship_ID']
-    contact_info = request.json['contact_info']
-    ship_area = request.json['ship_area']
-    ship_district = request.json['ship_district']
-    driver = request.json['driver']
-    car_type = request.json['car_type']
-    car_ID = request.json['car_ID']
-    is_elevator = request.json['is_elevator']
-    floors_byhand = request.json['floors_byhand']
-    amount_collect = request.json['amount_collect']
-    comment = request.json['comment']
-
-    print(ship_ID, contact_info, ship_area, ship_district, driver, car_type, car_ID, is_elevator, floors_byhand, amount_collect, comment)
-    new_shippment = Shippment(ship_ID, contact_info, ship_area, ship_district, driver, car_type, car_ID, is_elevator, floors_byhand, amount_collect, comment)
+    new_shippment = Shippment(
+        request.json['ship_ID'],
+        request.json['contact_info'],
+        request.json['ship_area'],
+        request.json['ship_district'],
+        request.json['driver'],
+        request.json['car_type'],
+        request.json['car_ID'],
+        request.json['is_elevator'],
+        request.json['floors_byhand'],
+        request.json['amount_collect'],
+        request.json['comment']
+    )
 
     db.session.add(new_shippment)
     db.session.commit()
 
-    # return jsonify(new_delivery)
     return '{}'.format(new_shippment)
-    # return 'user added ' + name
 
 # endpoint to show all shippment entries
 @app.route("/shippment", methods=["GET"])
 def get_shippment():
     all_shippments = Shippment.query.all()
-    print(all_shippments)
     result = shippments_schema.dump(all_shippments)
     return jsonify(result.data)
 
