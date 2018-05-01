@@ -13,14 +13,14 @@ libraries:
 
 # Handlers define how to route requests to your application.
 handlers:
-- url: *. # This regex directs all routes to main.app
+- url: .* # This regex directs all routes to main.app
   script: main.app
 
 # [START env_variables]
 env_variables:
     # Replace user, password, database, and instance connection name with the values obtained
     # when configuring your Cloud SQL instance.
-    # mysql://[username]:[password]@/[databasename]?unix_socket=/cloudsql/[connectionName]
+    # mysql://[username]:[password]@/[SQLinstanceName]?unix_socket=/cloudsql/[connectionName]
     # connectName will be something like project1:us-central1:instance1
     SQLALCHEMY_DATABASE_URI: >-
       mysql://root:user@/briantesting?unix_socket=/cloudsql/reviewpro-1503537903770:asia-east1:shipping

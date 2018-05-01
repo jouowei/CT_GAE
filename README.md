@@ -19,9 +19,13 @@ sudo apt-get install python-mysqldb
 
 * `cd` to directory
 
-* `pip install -t lib -r requirements.txt`
+* `sudo pip install -t lib -r requirements.txt`
+
+* `pip install flask flask_sqlalchemy flask_migrate`
+
+* `sudo pip install mysql-python==1.2.5 --upgrade -t lib` 
   
-* Database Setup
+* Database Setup if not through Google Cloud SQL panel
     Flask has support for several relational database management systems, including SQLite, MySQL, and PostgreSQL. MySQL is used for this exercise.
     Along with `Flask-SQLAlchemy` (Python-SQL Object Relational Mapper) and `mysqlclient` (Python 3 interface to MySQL. It will help us connect the MySQL database to the app.)
     
@@ -39,12 +43,18 @@ sudo apt-get install python-mysqldb
 
    
 * Migrations allow us to manage changes we make to the models, and propagate these changes in the database. Python package `flask-migrate`
+
+    temparory change app.config['SQLALCHEMY_DATABASE_URI'] to `mysql://[username]:[password]@[instanceIP]/[databaseName]`
+
+    inside terminal, run `export FLASK_APP=main.py`
     
     `flask db init` creates a migrations directory in the project directory
     
     `flask db migrate` creates migration
     
     `flask db upgrade` apply migration
+
+    change app.config['SQLALCHEMY_DATABASE_URI'] to back to `= os.environ['SQLALCHEMY_DATABASE_URI']`
 
 
 * For running locally,
