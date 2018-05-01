@@ -7,7 +7,10 @@ from flask_migrate import Migrate
 # db initialization
 db = SQLAlchemy()
 app = Flask(__name__, instance_relative_config=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://ctdb1:750111@35.194.115.158/briantesting"
+
+# connects to Google Cloud SQL within the same instance
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 # code for migrating db
