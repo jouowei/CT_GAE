@@ -26,9 +26,10 @@ def add_delivery():
     businesstype = request.json['businesstype']
     clientname = request.json['clientname']
     order_ID = request.json['order_ID']
+    delivery_fee = request.json['delivery_fee']
     comment = request.json['comment']
 
-    new_delivery = Delivery(businesstype, clientname, order_ID, comment)
+    new_delivery = Delivery(businesstype, clientname, delivery_fee, order_ID, comment)
 
     db.session.add(new_delivery)
     db.session.commit()
@@ -99,9 +100,10 @@ def add_shippment():
     new_shippment = Shippment(
         request.json['ship_ID'],
         request.json['contact_info'],
+        request.json['ship_orderstore'],
         request.json['ship_area'],
         request.json['ship_district'],
-        request.json['driver'],
+        request.json['ship_driver'],
         request.json['car_type'],
         request.json['car_ID'],
         request.json['is_elevator'],
@@ -140,6 +142,12 @@ def shippment_update(id):
         pass
 
     try:
+        ship_area = request.json['ship_orderstore']
+        shippment.ship_orderstore = ship_orderstore
+    except:
+        pass
+
+    try:
         ship_area = request.json['ship_area']
         shippment.ship_area = ship_area
     except:
@@ -152,7 +160,7 @@ def shippment_update(id):
         pass
 
     try:
-        driver = request.json['driver']
+        driver = request.json['ship_driver']
         shippment.driver = driver
     except:
         pass
